@@ -18,7 +18,7 @@ We recommended the following dependencies.
 ## Reward model
 ### Download data
 1. The public data set can be downloaded from this [link](https://tianchi.aliyun.com/dataset/93585).
-2. The pre-processed public data set (train.json and test.json) can be downloaded from this [link]().
+2. The pre-processed public data set (train.json and test.json) can be downloaded from this [link](https://drive.google.com/drive/folders/1YfdcPmVvVitkOMDXT7CvB6z9XHGIiite?usp=sharing).
 3. The pre-processed commercial __sampled__ data set (train_commercial_sample.json and test_commercial_sample.json) can also be downloaded from the above link. Note that the whole commercial data set will be shared soon.
 
 ### Download model
