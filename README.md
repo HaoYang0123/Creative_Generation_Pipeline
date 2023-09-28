@@ -17,7 +17,7 @@ We recommended the following dependencies.
 
 ## Reward model
 ### Download data
-1. The public data set can be downloaded from this [link](https://www.kaggle.com/c/kddcup2012-track2](https://tianchi.aliyun.com/dataset/93585).
+1. The public data set can be downloaded from this [link](https://tianchi.aliyun.com/dataset/93585).
 
 ### Download model
 1. All models including pre-trained BERT and pre-trained Swin models can be downloaded from this [link](https://drive.google.com/drive/folders/1_h7XCcbJvvYSv3H8JWqTzEBDulKjHDAs?usp=sharing).
