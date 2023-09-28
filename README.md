@@ -31,12 +31,12 @@ set -x
 
 cd extract_embedding
 
-bert_emb_model_path=$1
-bert_emb_config_path=$2
-meta_path=$3
+bert_emb_model_path=./models/bert_emb_model.pt
+bert_emb_config_path=./models/bert_emb_config.json
+meta_path=./models/meta2idx.json
 swin_emb_model_path=$4
-swin_emb_config_path=$5
-inpath=$6
+swin_emb_config_path=./models/swin_emb_config.json
+inpath=$1  # 
 
 google_doc_name="no_write"  # ctr_cr_uplift_exp
 
