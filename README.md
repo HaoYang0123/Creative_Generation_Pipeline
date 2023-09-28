@@ -22,7 +22,7 @@ We recommended the following dependencies.
 ### Download model
 1. All models including pre-trained BERT and pre-trained Swin models can be downloaded from this [link](https://drive.google.com/drive/folders/1_h7XCcbJvvYSv3H8JWqTzEBDulKjHDAs?usp=sharing).
 
-### Generating embedding of image and title
+### Generating embedding of image and title [For commercial data]
 
 ```bash
 #!/bin/bash
@@ -36,7 +36,7 @@ bert_emb_config_path=./models/bert_emb_config.json
 meta_path=./models/meta2idx.json
 swin_emb_model_path=$4
 swin_emb_config_path=./models/swin_emb_config.json
-inpath=$1  # 
+inpath=$1  # train.json/test.json
 
 google_doc_name="no_write"  # ctr_cr_uplift_exp
 
@@ -65,3 +65,4 @@ CUDA_VISIBLE_DEVICES=0 python -u extract_title_and_image_fea.py \
 
 ```
 
+### Generating embedding of image and title [For public data]
