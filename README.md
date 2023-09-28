@@ -38,14 +38,16 @@ bert_emb_config_path=./models/bert_emb_config.json
 swin_emb_model_path=./models/swin_emb_model.pt
 swin_emb_config_path=./models/swin_emb_config.json
 meta_path=./models/meta2idx.json
-inpath=$1  # train.json/test.json
+inpath=$1  # train_commercial_sample.json/test_commercial_sample.json
+save_folder_img=./img_fea_pretrain_commercial_sample
+save_folder_txt=./txt_fea_pretrain_commercial_sample
 
 google_doc_name="no_write"  # ctr_cr_uplift_exp
 
 CUDA_VISIBLE_DEVICES=0 python -u extract_title_and_image_fea.py \
     --meta-path $meta_path \
-    --save-folder-img ./img_fea_pretrain \
-    --save-folder-txt ./txt_fea_pretrain \
+    --save-folder-img ${save_folder_img} \
+    --save-folder-txt ${save_folder_txt} \
     --test-sample-path $inpath \
     --load-pretrain \
     --batch-size 8 \
