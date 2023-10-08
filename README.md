@@ -163,7 +163,7 @@ CUDA_VISIBLE_DEVICES=2 python -u predict_embedding.py \
     --print-freq 10
 ```
 
-### Evaluate reward model [For commercial data]
+### Train and evaluate reward model [For commercial data]
 ```
 set -x
 
@@ -181,7 +181,7 @@ mkdir $outfolder
 outpath=${outfolder}/res_paper.txt
 model_path=./model_commercial_sample
 
-
+### step1. Train reward model
 CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
     --sample-path ${train_path} \
     --outpath ${outpath} \
@@ -214,6 +214,9 @@ CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
     --bert-emb-meta-path ${bert_emb_config_path} \
     --swin-emb-checkpoint-path ${swin_emb_model_path} \
     --swin-emb-meta-path ${swin_emb_config_path}
+
+### step2. Evaluate results
+python -u eval.py ./result_commercial_sample
 ```
 
 ### Evaluate reward model [For public data]
@@ -234,7 +237,7 @@ mkdir $outfolder
 outpath=${outfolder}/res_paper.txt
 model_path=./model_public
 
-
+### step1. Train reward model
 CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
     --sample-path ${train_path} \
     --outpath ${outpath} \
@@ -270,4 +273,7 @@ CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
     --bert-emb-meta-path ${bert_emb_config_path} \
     --swin-emb-checkpoint-path ${swin_emb_model_path} \
     --swin-emb-meta-path ${swin_emb_config_path}
+
+### step2. Evaluate results
+python -u eval.py ./result_public
 ```
