@@ -31,7 +31,7 @@ We recommended the following dependencies.
 
 set -x
 
-cd extract_embedding
+cd reward_model/extract_embedding
 
 bert_emb_model_path=./models/bert_emb_model.pt
 bert_emb_config_path=./models/bert_emb_config.json
@@ -50,7 +50,7 @@ CUDA_VISIBLE_DEVICES=0 python -u extract_title_and_image_fea.py \
     --save-folder-txt ${save_folder_txt} \
     --test-sample-path $inpath \
     --load-pretrain \
-    --batch-size 8 \
+    --batch-size 32 \
     --workers 30 \
     --write-ratio 0.2 \
     --imp-count-test -100 \
@@ -70,3 +70,38 @@ CUDA_VISIBLE_DEVICES=0 python -u extract_title_and_image_fea.py \
 ```
 
 ### Generating embedding of image and title [For public data]
+
+```bash
+#!/bin/bash
+
+set -x
+
+cd reward_model/extract_embedding
+
+swin_emb_model_path=./models/swin_emb_model_public.pt
+swin_emb_config_path=./models/swin_emb_config.json
+meta_path=./models/meta2idx.json
+inpath=$1  # train.json/test.json
+save_folder_img=./img_fea_pretrain_public
+
+google_doc_name="no_write"  # ctr_cr_uplift_exp
+
+CUDA_VISIBLE_DEVICES=0 python -u extract_only_image_fea_public.py \
+    --meta-path ${meta_path} \
+    --save-folder-img ${save_folder_img} \
+    --test-sample-path ${inpath} \
+    --load-pretrain \
+    --batch-size 32 \
+    --workers 30 \
+    --write-ratio 0.2 \
+    --imp-count-test -100 \
+    --list-len 14 \
+    --print-freq 10 \
+    --write-google-name ${google_doc_name} \
+    --need-img-emb \
+    --fix-swin \
+    --lambda-pointwise 0.1 \
+    --swin-emb-checkpoint-path ${swin_emb_model_path} \
+    --swin-emb-meta-path ${swin_emb_config_path}
+
+```
