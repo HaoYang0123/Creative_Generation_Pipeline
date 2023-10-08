@@ -215,3 +215,59 @@ CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
     --swin-emb-checkpoint-path ${swin_emb_model_path} \
     --swin-emb-meta-path ${swin_emb_config_path}
 ```
+
+### Evaluate reward model [For public data]
+```
+set -x
+
+cd reward_model/train_and_predict
+
+bert_emb_model_path=./models/bert_emb_model.pt
+bert_emb_config_path=./models/bert_emb_config.json
+swin_emb_model_path=./models/swin_emb_model_public.pt
+swin_emb_config_path=./models/swin_emb_config.json
+
+train_path=./data/train.json
+test_path=./data/test.json
+outfolder=./result_public
+mkdir $outfolder
+outpath=${outfolder}/res_paper.txt
+model_path=./model_public
+
+
+CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
+    --sample-path ${train_path} \
+    --outpath ${outpath} \
+    --test-sample-path ${test_path} \
+    --batch-size 2048 \
+    --img-folder ./img_fea_pretrain_public \
+    --cap-folder ./cap_fea_pretrain_public \
+    --txt-folder ./txt_fea_pretrain_public \
+    --list-len 15 \
+    --workers 30 \
+    --epoches 30 \
+    --public \
+    --norm-weight \
+    --fc-hidden-size "128,10" \
+    --loss-type "base" \
+    --learning-rate 5e-4 \
+    --write-emb \
+    --num-step-swin 13000000 \
+    --num-step-bert 13000000 \
+    --model-folder ${model_path} \
+    --print-freq 10 \
+    --swin-out-size 1024 \
+    --txt-input-dim 1024 \
+    --need-img-emb \
+    --need-cap-emb \
+    --need-txt-emb \
+    --local-file \
+    --lambda-pointwise 0.1 \
+    --lambda-sim 0.0 \
+    --imp-count-train 10 \
+    --imp-count-test 0 \
+    --bert-emb-checkpoint-path ${bert_emb_model_path} \
+    --bert-emb-meta-path ${bert_emb_config_path} \
+    --swin-emb-checkpoint-path ${swin_emb_model_path} \
+    --swin-emb-meta-path ${swin_emb_config_path}
+```
