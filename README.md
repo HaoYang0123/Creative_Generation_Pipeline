@@ -162,3 +162,56 @@ CUDA_VISIBLE_DEVICES=2 python -u predict_embedding.py \
     --max-seq-len 256 \
     --print-freq 10
 ```
+
+### Evaluate reward model [For commercial data]
+```
+set -x
+
+cd reward_model/train_and_predict
+
+bert_emb_model_path=./models/bert_emb_model.pt
+bert_emb_config_path=./models/bert_emb_config.json
+swin_emb_model_path=./models/swin_emb_model.pt
+swin_emb_config_path=./models/swin_emb_config.json
+
+train_path=./data/train_commercial_sample.json
+test_path=./data/test_commercial_sample.json
+outfolder=./result_commercial_sample
+mkdir $outfolder
+outpath=${outfolder}/res_paper.txt
+model_path=./model_commercial_sample
+
+
+CUDA_VISIBLE_DEVICES=0 python -u train_speedup.py \
+    --sample-path ${train_path} \
+    --outpath ${outpath} \
+    --test-sample-path ${test_path} \
+    --batch-size 2048 \
+    --txt-folder ./txt_fea_pretrain_commercial_sample \
+    --img-folder ./img_fea_pretrain_commercial_sample \
+    --cap-folder ./cap_fea_pretrain_commercial_sample \
+    --list-len 15 \
+    --workers 30 \
+    --epoches 30 \
+    --public \
+    --norm-weight \
+    --fc-hidden-size "128,1" \
+    --loss-type "base" \
+    --learning-rate 5e-4 \
+    --learning-rate-swin 1e-4 \
+    --learning-rate-bert 1e-4 \
+    --num-step-swin 13000000 \
+    --num-step-bert 13000000 \
+    --model-folder ${model_path} \
+    --print-freq 10 \
+    --need-img-emb \
+    --need-txt-emb \
+    --need-cap-emb \
+    --lambda-pointwise 0.1 \
+    --lambda-sim 0.0 \
+    --imp-count-test 100 \
+    --bert-emb-checkpoint-path ${bert_emb_model_path} \
+    --bert-emb-meta-path ${bert_emb_config_path} \
+    --swin-emb-checkpoint-path ${swin_emb_model_path} \
+    --swin-emb-meta-path ${swin_emb_config_path}
+```
