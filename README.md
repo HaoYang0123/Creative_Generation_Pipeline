@@ -136,3 +136,29 @@ CUDA_VISIBLE_DEVICES=0 python -u extract_only_image_fea_public.py \
 python -u get_title_fea.py ./img_fea_pretrain_public ./title_fea_pretrain_public
 
 ```
+
+
+### Generating embedding of caption [For public data]
+```bash
+#!/bin/bash
+
+set -x
+
+cd reward_model/extract_caption_embedding
+
+inpath_path=./data/caption_public.json
+model_path=./models/cap_emb_model_public.pt
+out_nlp_feature_root=./cap_fea_pretrain_public
+
+CUDA_VISIBLE_DEVICES=2 python -u predict_embedding.py \
+    --sample-path ${inpath_path} \
+    --batch-size 128 \
+    --epoches 1 \
+    --bert-model bert-base-uncased \
+    --checkpoint-path ${model_path} \
+    --out-folder ${out_nlp_feature_root} \
+    --mask-txt-ratio 0.1 \
+    --max-mask-num 3 \
+    --max-seq-len 256 \
+    --print-freq 10
+```
