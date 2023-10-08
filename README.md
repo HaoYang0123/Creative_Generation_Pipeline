@@ -86,6 +86,7 @@ save_folder_img=./img_fea_pretrain_public
 
 google_doc_name="no_write"  # ctr_cr_uplift_exp
 
+### step1 extract image features
 CUDA_VISIBLE_DEVICES=0 python -u extract_only_image_fea_public.py \
     --meta-path ${meta_path} \
     --save-folder-img ${save_folder_img} \
@@ -103,5 +104,8 @@ CUDA_VISIBLE_DEVICES=0 python -u extract_only_image_fea_public.py \
     --lambda-pointwise 0.1 \
     --swin-emb-checkpoint-path ${swin_emb_model_path} \
     --swin-emb-meta-path ${swin_emb_config_path}
+
+### step2 extract title features from image features
+python -u get_title_fea.py ./img_fea_pretrain_public ./title_fea_pretrain_public
 
 ```
