@@ -1,10 +1,10 @@
 ## Creative Generation Pipeline
 
-Creative generation pipeline: fine-tuning stable diffusion model and prompt with reward model for CTR target.
+A New Creative Generation Pipeline for Click-Through Rate with Stable Diffusion Model.
 
 
 ## Introduction
-We proposed an new automated Creative Generation pipeline for Click-Through rate (CGCT) in [Shopee](https://shopee.co.id/). 
+We proposed an new automated Creative Generation pipeline for Click-Through rate (CG4CTR) in [Shopee](https://shopee.co.id/). 
 
 
 ## Requirements and Installation
